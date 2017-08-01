@@ -1,5 +1,16 @@
-all: 02
-01: 02.o
+PROG = 02
+CC = gcc
+CFLAGS = -Wall -ansi -pedantic -std=c11
+OBJS = main.o primalidade.o fatorial.o
 
-main.o: 02.c
-	gcc -Wall -pedantic -ansi -std=c11 -o 02.o -c 02.c
+$(PROG): $(OBJS)
+	$(CC) -o $(PROG) $(OBJS) -lm
+	rm -f $(OBJS)
+main.o: primalidade.o fatorial.o
+	$(CC) $(CFLAGS) -c main.c
+primalidade.o:
+	$(CC) $(CFLAGS) -c primalidade.c
+fatorial.o:
+	$(CC) $(CFLAGS) -c fatorial.c
+clean:
+	rm -f $(OBJS)
